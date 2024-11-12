@@ -1,13 +1,13 @@
 # Course-Notes
 
-笔记免费分享，有用的话麻烦点个star。
+Free sharing of notes, if useful, please click on star.
 
-本笔记参考课程老师的PPT，以及b站up主滹沱河樵夫发布的工程经济与管理合集。如有侵权，可联系本人邮箱解决。
+This note is based on the course teacher's PPT, as well as the collection of engineering economics and management published by the Bilibili user Hutuohe Woodcutter. If there is any infringement, please contact my email for resolution.
 
-**笔记解释权归作者本人所有。**
+**The right to interpret notes belongs to the author themselves**
 
-此笔记正在Github持续更新中，严禁买卖。
+This note is being continuously updated on Github and buying and selling is strictly prohibited.
 
-只负责笔记分享，不负责答疑工作。如有勘误，可联系邮箱。
+Only responsible for note sharing, not for answering questions. If there are any corrections, please contact your email.
 
-本人邮箱`ZSDZZY2022@163.com`
+My email address` ZSDZZY2022@163.com `
