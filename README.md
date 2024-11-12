@@ -4,6 +4,7 @@
 
 **English** | [简体中文](/readme/README.zh_CN.md) | [繁體中文](/readme/README.zh_TW.md)
 
+</div>
 
 ## Currently completed notes:
 
