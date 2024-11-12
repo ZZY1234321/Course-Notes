@@ -1,14 +1,10 @@
 <div align="center">
 
-
-
 # 课程笔记
-
-
 
 **简体中文**  | [English](/README.md)  | [繁體中文](/readme/README.zh_TW.md)
 
-
+</div>
 
 ## 目前已完成笔记：
 
