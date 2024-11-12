@@ -2,7 +2,7 @@
 
 # Course notes
 
-**English** | [简体中文] (/README. md) | [繁體中文] (/readme/README. zh_TW. md)
+**English** | [简体中文] (/readme/README.zh_CN.md) | [繁體中文] (/readme/README.zh_TW.md)
 
 
 ## Currently completed notes:
