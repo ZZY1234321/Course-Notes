@@ -8,11 +8,11 @@
 
 ## Currently completed notes:
 
--Technical Economics and Engineering Management, first semester of academic year 2024-2025, CUPB.
+- Technical Economics and Engineering Management, first semester of academic year 2024-2025, CUPB.
 
 ## Currently completing notes:
 
--Machine Learning, first semester of academic year 2024-2025, CUPB.
+- Machine Learning, first semester of academic year 2024-2025, CUPB.
 
 
 Free sharing of notes, if useful, please click on **star**. **The right to interpret notes belongs to the author themselves.**
