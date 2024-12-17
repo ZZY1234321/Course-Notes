@@ -1,0 +1,68 @@
+\documentclass[12pt, a4paper, oneside]{ctexbook}
+\usepackage[a4paper, left=3cm, right=3cm, top=2.5cm, bottom=2.5cm]{geometry} % 调整边距
+\usepackage{amsmath, amsthm, amssymb, bm, graphicx, hyperref, mathrsfs, fancyhdr, pifont, float, booktabs, longtable}
+
+
+\title{{\Huge{\textbf{技术经济与工程管理}}}\\——2024秋季学期}
+\author{ZZY1234321}
+\date{\today}
+\linespread{1.5}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{definition}[theorem]{定义}
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{corollary}[theorem]{推论}
+\newtheorem{example}[theorem]{例}
+\newtheorem{proposition}[theorem]{命题}
+
+\begin{document}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+\renewcommand{\headheight}{15pt} % 使用有效的格式
+\setlength{\headsep}{20pt} % 设置页眉与正文之间的距离
+
+\maketitle
+
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+\begin{center}
+    \Huge\textbf{前言}
+\end{center}~\
+
+本笔记参考课程老师的PPT，以及b站up主“滹沱河樵夫”发布的“工程经济与管理”合集。如有侵权，可联系本人。笔记解释权归作者本人所有。此笔记正在Github持续更新中，方便的话麻烦点个star，感谢支持。
+
+Github开源链接：https://github.com/ZZY1234321/Course-Notes
+
+如果你是通过付费购买的本笔记，那么恭喜你被骗了，尽快去找那个卖笔记给你的人，看看能不能把钱追回来。
+
+~\\
+\begin{flushright}
+    \begin{tabular}{c}
+        ZZY1234321\\
+        \today
+    \end{tabular}
+\end{flushright}
+
+\newpage
+\pagenumbering{Roman}
+\setcounter{page}{1}
+\tableofcontents
+\newpage
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+\input{chapter1/chapter1}
+\input{chapter2/chapter2}
+\input{chapter3/chapter3}
+\input{chapter4/chapter4}
+\input{chapter5/chapter5}
+\input{chapter6/chapter6}
+\input{chapter7/chapter7}
+\input{chapter8/chapter8}
+\input{考试分析/考试分析}
+
+
+\end{document}
