@@ -1,0 +1,1139 @@
+\documentclass[UTF8,a4paper,11pt]{ctexart}
+
+\usepackage{geometry}
+\geometry{left=2.2cm,right=2.2cm,top=2.5cm,bottom=2.5cm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\graphicspath{{figs/}}
+
+\xeCJKDeclareCharClass{CJK}{"2460 -> "24FF}
+
+\definecolor{ansbg}{RGB}{246,248,251}
+\definecolor{ansframe}{RGB}{105,128,163}
+
+% ---- 答案框 ----
+\newtcolorbox{ans}{
+  enhanced, breakable,
+  colback=ansbg, colframe=ansframe, boxrule=0.4pt, arc=1.5pt,
+  left=8pt, right=8pt, top=5pt, bottom=5pt,
+  before skip=4pt, after skip=8pt
+}
+
+\newenvironment{answer}%
+  {\begin{ans}\noindent{\bfseries\color{ansframe}【答案】}\hspace{0.4em}}%
+  {\end{ans}}
+
+% ---- 填空横线（允许在横线前后断行，避免行溢出）----
+\newcommand{\blank}[1][2.2em]{\allowbreak\underline{\hspace{#1}}\nobreak}
+\setlength{\emergencystretch}{3em}
+
+% ---- 章节标题格式：一、二、三、四 ----
+\ctexset{
+  section = {
+    name = {,、},
+    number = \chinese{section},
+    format = \Large\bfseries,
+    aftername = {},
+    beforeskip = 1.4ex plus .3ex,
+    afterskip = 1.0ex plus .2ex
+  }
+}
+
+% ---- 列表格式 ----
+\setlist[enumerate,1]{label=\textbf{\arabic*.}, leftmargin=2.4em, itemsep=0.6em, topsep=0.4em}
+\setlist[enumerate,2]{label=（\arabic*）, leftmargin=2.9em, itemsep=0.25em, topsep=0.25em}
+\setlist[itemize]{leftmargin=1.8em, itemsep=0.15em, topsep=0.2em}
+
+\title{\bfseries 期末复习题 2026\\[6pt]\large 含参考答案}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace*{-52pt}% 收紧标题与第一节之间的空白
+
+% ============================================================================
+\section{填空题}
+
+\begin{enumerate}
+
+\item 衡量半结构化数据模型的三条“公认要求”通常表述为：允许数据模式 \mbox{\blank、}数据本身 \mbox{\blank、}数据中的同名字段语义允许 \mbox{\blank。}
+\begin{answer}
+灵活或不预先固定；自描述；不一致（异构）
+\end{answer}
+
+\item OEM 的中文全称是 \mbox{\blank，}该模型用带 \blank 的有向图表示数据，图中每个对象由 \mbox{\blank、}\blank 和 \blank 三元组构成。
+\begin{answer}
+对象交换模型（Object Exchange Model）；标签；对象标识符、标签、值
+\end{answer}
+
+\item 在 XML 中，元素的并列序列用 \blank 表达，元素的强制性用 \blank 表达，元素的唯一性用 \blank 表达。
+\begin{answer}
+\texttt{,}（XML Schema 用 \texttt{xs:sequence}）；\texttt{\#REQUIRED}（DTD 元素默认出现一次）；\texttt{ID}（XML Schema 用 \texttt{xs:unique} 或 \texttt{xs:key}）。注：\texttt{?} 只表示出现 0 或 1 次，不能表示唯一性。
+\end{answer}
+
+\item 图数据模型的两种主流形式是 \blank 与 \mbox{\blank；}前者以 Neo4j 为代表，后者以 \blank 为标准数据模型。
+\begin{answer}
+属性图模型；RDF 图模型；W3C RDF
+\end{answer}
+
+\item RDF 的基本数据单位是 \mbox{\blank，}其三个组成部分分别称为 \mbox{\blank、}\mbox{\blank、}\mbox{\blank。}
+\begin{answer}
+三元组；主体（Subject）；谓词（Predicate）；客体（Object）
+\end{answer}
+
+\item 本体语义模型的四类核心构件是 \mbox{\blank、}\mbox{\blank、}\blank 和 \mbox{\blank。}
+\begin{answer}
+类（概念）；属性；关系；公理（约束）
+\end{answer}
+
+\item 布隆过滤器由长度为 $m$ 的 \blank 和 $k$ 个相互独立的 \blank 组成；查询时若任一对应位为 0，则可判定元素 \mbox{\blank。}
+\begin{answer}
+位数组；哈希函数；一定不存在
+\end{answer}
+
+\item 布隆过滤器只会产生 \blank（假阳性/假阴性），不会产生 \mbox{\blank；}其误判率近似公式为 $p \approx$ \mbox{\blank。}
+\begin{answer}
+假阳性；假阴性；$p \approx \left(1-e^{-kn/m}\right)^{k}$
+\end{answer}
+
+\item 给定预期元素数 $n$ 与目标误判率 $p$，位数组长度 $m \approx$ \mbox{\blank；}使误判率最低的哈希函数个数 $k =$ \mbox{\blank。}
+\begin{answer}
+$m \approx -n\ln p/(\ln 2)^{2}$；\quad $k=(m/n)\ln 2$
+\end{answer}
+
+\item 布谷鸟过滤器存储的不是元素本身而是 \mbox{\blank；}每个元素有 \blank 个候选桶，其位置关系可由 \blank 与 \blank 异或计算得到，因此桶大小必须是 \mbox{\blank。}
+\begin{answer}
+指纹（fingerprint）；2；第一个候选桶位置 $i_1$；指纹的哈希值 $h(\text{fingerprint})$；2 的幂（严格说约束的是桶的数量，即桶数组长度为 2 的幂，而非每桶槽位数）
+\end{answer}
+
+\item 布谷鸟过滤器把元素哈希成固定长度的短值存储，该短值称为 \mbox{\blank；}插入冲突时采用 \blank 机制，被踢出的元素搬到它的另一个候选桶中。
+\begin{answer}
+指纹；踢出（Eviction / Kick-out）
+\end{answer}
+
+\item 跳表在有序链表之上增加多层“\blank”，每个节点出现在第 $i+1$ 层的概率为 $p$，通常取 $p =$ \mbox{\blank；}当 $p=1/2$ 时，每个元素的平均指针数约为 \mbox{\blank。}
+\begin{answer}
+快速索引（Express Lanes）；$1/2$；2
+\end{answer}
+
+\item 跳表的查找、插入、删除的期望时间复杂度为 \mbox{\blank，}最坏情况为 \mbox{\blank；}其空间复杂度期望为 \mbox{\blank。}
+\begin{answer}
+$O(\log n)$；$O(n)$；$O(n)$
+\end{answer}
+
+\item LSM 树的写入路径由内存中的 \blank 与磁盘上的 \blank 组成，核心思想是把随机写转化为 \mbox{\blank。}
+\begin{answer}
+MemTable；SSTable；顺序写
+\end{answer}
+
+\item LSM 树的三种代价放大是 \mbox{\blank、}\blank 和 \mbox{\blank，}三者不能同时最小化。
+\begin{answer}
+写放大；读放大；空间放大
+\end{answer}
+
+\item 云原生数据库的核心架构特征是将 \blank 与 \blank 解耦，并由 \blank 完成集群管理；Serverless 形态下可实现 \blank（指资源可缩到零）。
+\begin{answer}
+计算；存储；控制平面（编排调度系统）；缩容至零（Scale to Zero）
+\end{answer}
+
+\item 数据库与大模型的双向赋能通常表述为 \blank 与 \mbox{\blank。}
+\begin{answer}
+AI4DB；DB4AI
+\end{answer}
+
+\item RAG 由 \blank 和 \blank 两个环节构成，其核心思路是在生成之前先从外部知识源检索相关内容并注入模型的 \mbox{\blank，}使输出基于检索到的材料而非仅依赖模型参数记忆。
+\begin{answer}
+检索（Retrieval）；生成（Generation）；上下文（Context）
+\end{answer}
+
+\item 大语言模型的两个结构性局限是知识截止与 \mbox{\blank，}RAG 被视为应对这两者的最实用技术路线。
+\begin{answer}
+幻觉（Hallucination）
+\end{answer}
+
+\item 标准 RAG 流程可分为离线与在线两个阶段：离线阶段完成文档加载、清洗、\mbox{\blank、}嵌入向量化并入库；在线阶段完成查询嵌入、检索、\blank 与生成。
+\begin{answer}
+文档分块（Chunking）；重排序（Reranking）
+\end{answer}
+
+\item 向量数据库通过 \blank（ANN）索引，在 \blank 的前提下获得数量级的速度提升。
+\begin{answer}
+近似最近邻（ANN）；牺牲少量召回率
+\end{answer}
+
+\end{enumerate}
+
+% ============================================================================
+\section{选择题}
+
+以下题目除明确说明外均为单选。
+
+\begin{enumerate}
+
+\item 为了减少从存储空间检索记录的开销，通常采用：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item 日志
+\item 数据库缓冲区
+\item 中间空间
+\item 下层记录
+\end{enumerate}
+\begin{answer}
+\textbf{B}
+\end{answer}
+
+\item 数据以“块（blocks）”的形式存储和检索的主要原因是：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item 尽量减少实际磁盘访问次数
+\item 节省空间
+\item 使编程更容易
+\item 延长硬件使用寿命
+\end{enumerate}
+\begin{answer}
+\textbf{A}\quad 解析：以块为单位读写可减少实际磁盘访问次数，这是采用块存储的主要原因。
+\end{answer}
+
+\item 存储跨块记录的文件与存储非跨块记录的文件之间的区别在于：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item 如果一个块中无法容纳整数条记录，则包含跨块记录的文件在存储记录时所占用的磁盘空间会比不包含跨块记录的文件少
+\item 一个包含跨磁盘记录的文件可能包含存储在多个磁盘块上的记录
+\item 当记录的大小大于块大小时，必须使用包含跨块记录的文件
+\item 以上全部
+\end{enumerate}
+\begin{answer}
+\textbf{D}\quad 解析：跨块存储可减少块尾空间浪费，允许记录跨块存放，也能容纳大于单块的记录。
+\end{answer}
+
+\item 下列关于布隆过滤器的说法中，正确的是：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item 存在假阴性，且可以删除元素
+\item 不存在假阴性，但不能直接删除元素
+\item 误判率与元素数量无关
+\item 哈希函数越多误判率一定越低
+\end{enumerate}
+\begin{answer}
+\textbf{B}\quad 解析：布隆过滤器无假阴性，但共享位使其不能直接安全删除元素。
+\end{answer}
+
+\item 下列关于布隆过滤器的判定说法中，正确的是：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item 若 $k$ 个位置全为 1，则元素一定存在
+\item 若存在一位为 0，则元素一定不存在
+\item 布隆过滤器可能出现假阴性，因此不适合做前置拦截
+\item 位数组越大，$k$ 越小，误判率越低
+\end{enumerate}
+\begin{answer}
+\textbf{B}\quad 解析：某一位为 0 即可断定元素一定不存在；全为 1 只能说明可能存在。
+\end{answer}
+
+\item 下列关于计数布隆过滤器（CBF）与布谷鸟过滤器的说法中，正确的是（\quad）
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item CBF 与布隆过滤器占用空间完全相同
+\item 布谷鸟过滤器无需计数器即可删除，空间优于 CBF
+\item 布谷鸟过滤器插入性能恒优于布隆过滤器
+\item CBF 无法支持删除
+\end{enumerate}
+\begin{answer}
+\textbf{B}\quad 解析：计数布隆过滤器用计数器支持删除，布谷鸟过滤器存储指纹支持删除，且通常更省空间。
+\end{answer}
+
+\item 布谷鸟过滤器要求桶大小为 2 的幂，其根本原因是：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item 便于用二进制表示指纹
+\item 保证备用桶可由“位置异或指纹哈希”相互推导，且结果仍在桶数组范围内
+\item 便于并行插入
+\item 减少指纹长度
+\end{enumerate}
+\begin{answer}
+\textbf{B}\quad 解析：异或寻址要求桶数组长度为 2 的幂，才能保证备用桶落在数组范围内并可相互推导。
+\end{answer}
+
+\item 下列关于布谷鸟过滤器删除操作的说法中，正确的是：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item 删除永远不会误删其他元素
+\item 若元素未插入而执行删除，可能误删指纹相同的其他元素
+\item 同一元素重复插入次数没有上限
+\item 删除后误判率会上升
+\end{enumerate}
+\begin{answer}
+\textbf{B}\quad 解析：指纹碰撞时，删除未插入的元素可能误删同指纹的其他元素。
+\end{answer}
+
+\item 某系统需要对缓存穿透做拦截，且需支持元素动态删除，最合适的选择是：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item 普通布隆过滤器
+\item 计数布隆过滤器或布谷鸟过滤器
+\item 有序数组 + 二分查找
+\item 哈希表全量存储
+\end{enumerate}
+\begin{answer}
+\textbf{B}\quad 解析：需要动态删除时应选计数布隆过滤器或布谷鸟过滤器。
+\end{answer}
+
+\item 布谷鸟过滤器在插入时触发“踢巢”连锁搬移，最坏情况可能导致：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item 查询出现假阴性
+\item 插入失败，需要扩容或 Rehash
+\item 元素被静默丢失且无法察觉
+\item 桶数量必须为质数
+\end{enumerate}
+\begin{answer}
+\textbf{B}\quad 解析：踢出链过长时可能插入失败，需要扩容或 Rehash。
+\end{answer}
+
+\item 跳表最坏情况退化为 $O(n)$ 的概率约为（设 $p=1/2$，$n$ 个元素）：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item $2^{-n}$ 量级，极其罕见
+\item 约 $1/n$
+\item 约 50\%
+\item 必然发生
+\end{enumerate}
+\begin{answer}
+\textbf{A}\quad 解析：在理想化随机模型下，严重退化的概率极低。
+\end{answer}
+
+\item 下列关于 LSM 树与 B+ 树比较的说法中，正确的是：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item LSM 树的写放大通常低于 B+ 树的写放大
+\item LSM 树把随机写转为顺序写，写性能好，但读可能需查多层，读放大较高
+\item LSM 树不支持范围查询
+\item LSM 树的 compaction 不影响写放大
+\end{enumerate}
+\begin{answer}
+\textbf{B}\quad 解析：LSM 把随机写转为顺序写，写入性能好，但读可能需查多层，读放大较高。
+\end{answer}
+
+\item 下列关于 LSM 树的读路径的说法中，正确的是：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item 读操作不需要检查内存
+\item 点查需要依次检查 MemTable、不可变 MemTable 与各级 SSTable，布隆过滤器与稀疏索引用于削减无效 I/O
+\item LSM 树的读性能恒优于 B+ 树
+\item SSTable 内部无序，需全扫描
+\end{enumerate}
+\begin{answer}
+\textbf{B}\quad 解析：点查依次检查 MemTable、不可变 MemTable 与各级 SSTable，布隆过滤器与稀疏索引削减无效 I/O。
+\end{answer}
+
+\item 若某 LSM 引擎希望降低写放大、可接受更高的读放大与空间放大，应优先选择：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item Leveled Compaction
+\item Size-Tiered Compaction
+\item 关闭 Compaction
+\item 全部写入 L0
+\end{enumerate}
+\begin{answer}
+\textbf{B}\quad 解析：Size-Tiered Compaction 偏向降低写放大，代价是更高的读放大与空间放大。
+\end{answer}
+
+\item 下列关于云原生数据库的说法中，错误的是：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item 存算分离后计算节点无状态，可快速扩缩
+\item Serverless 模式下按实际使用量计费，可自动启停
+\item 存算分离后存储层容量与性能不能独立扩展
+\item 计算节点扩缩容不必搬运全量数据
+\end{enumerate}
+\begin{answer}
+\textbf{C}\quad 解析：存算分离后存储层的容量与性能可以独立扩展，C 的说法错误。
+\end{answer}
+
+\item 云原生数据库“存算分离”带来的直接收益不包括：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item 计算节点可秒级弹性扩缩容
+\item 存储与计算可独立扩展，只读副本更经济
+\item 使单机事务的写入延迟必然降为常数
+\item 便于多副本与高可用部署
+\end{enumerate}
+\begin{answer}
+\textbf{C}\quad 解析：存算分离不能保证单机事务的写入延迟必然降为常数。
+\end{answer}
+
+\item AI Native 数据库的典型能力不包括：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item 原生向量数据类型与近似最近邻索引
+\item NL2SQL 自然语言问数
+\item 自动参数调优、索引推荐等自治运维
+\item 以牺牲语义检索为代价换取纯关键字精确匹配
+\end{enumerate}
+\begin{answer}
+\textbf{D}\quad 解析：AI Native 数据库强调原生向量检索与多模态能力，不会牺牲语义检索换取纯关键字匹配。
+\end{answer}
+
+\item 在 AI 大模型应用背景下，AI Native 数据库与传统数据库的核心差异主要体现在：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item 只支持 SQL，不支持向量类型
+\item 原生支持向量检索、多模态数据与库内模型算子，可直接服务 RAG 与 AI Agent
+\item 必须外挂独立向量库才能完成语义检索
+\item 放弃事务能力以换取检索性能
+\end{enumerate}
+\begin{answer}
+\textbf{B}\quad 解析：核心差异是原生支持向量检索、多模态数据与库内模型算子，可直接服务 RAG 与 AI Agent。
+\end{answer}
+
+\item 下列关于 RAG（检索增强生成）与传统数据库关系的说法中，正确的是：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item RAG 无需向量检索，仅靠关键词匹配即可
+\item RAG 需将文档/知识转为向量并做相似度检索，数据库内置向量能力可避免单独部署向量库带来的数据同步与一致性成本
+\item RAG 检索阶段必须把全部数据搬出数据库
+\item 向量检索天然精确，不存在召回率问题
+\end{enumerate}
+\begin{answer}
+\textbf{B}\quad 解析：RAG 需将文档转为向量并做相似度检索；数据库内置向量能力可避免独立向量库的数据同步与一致性成本。
+\end{answer}
+
+\item RAG 相比微调（fine-tuning）的主要优势在于：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item 能提升模型的推理能力上限
+\item 知识可动态更新、无需频繁重训模型，且便于给出可追溯的来源
+\item 不需要任何向量索引
+\item 能彻底消除幻觉
+\end{enumerate}
+\begin{answer}
+\textbf{B}\quad 解析：RAG 知识可动态更新、无需频繁重训，且便于给出可追溯来源。
+\end{answer}
+
+\item 在 RAG 流程中，将用户问题转化为向量的正确做法是：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item 换用一个更强的嵌入模型，以提升检索效果
+\item 使用与索引文档相同的嵌入模型
+\item 直接用 LLM 生成一个随机向量
+\item 使用关键词哈希值
+\end{enumerate}
+\begin{answer}
+\textbf{B}\quad 解析：查询与文档必须使用兼容的嵌入空间，通常使用相同的嵌入模型。
+\end{answer}
+
+\item 下列关于向量检索“近似最近邻（ANN）”的说法中，正确的是：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item ANN 保证返回 100\% 精确的最近邻
+\item ANN 以召回率为代价换取速度，实际系统召回率通常为 95\%～99\%
+\item ANN 只适用于小规模数据集
+\item ANN 不需要建立任何索引结构
+\end{enumerate}
+\begin{answer}
+\textbf{B}\quad 解析：ANN 以少量召回率为代价换取速度，实际系统召回率通常为 95\%～99\%。
+\end{answer}
+
+\item 某场景数据规模为上亿条、内存预算紧张且数据相对静态，最合适的索引/方案是：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item Flat 暴力索引
+\item HNSW
+\item IVF＋PQ，或将图索引与原始数据放到 SSD 的磁盘索引方案
+\item 全量加载到内存的哈希索引
+\end{enumerate}
+\begin{answer}
+\textbf{C}\quad 解析：上亿条、内存紧张且数据相对静态时，适合 IVF＋PQ 或磁盘图索引方案。
+\end{answer}
+
+\item 下列关于 HNSW 结构的描述中，正确的是：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item 所有层节点数量相同
+\item 底层包含全部向量节点，越高层越稀疏，查询自顶向下逐层贪心下降
+\item 用 K-means 把向量聚成若干簇
+\item 通过哈希把向量映射到固定桶中
+\end{enumerate}
+\begin{answer}
+\textbf{B}\quad 解析：HNSW 底层包含全部节点，越高层越稀疏，查询自顶向下逐层贪心下降。
+\end{answer}
+
+\item 下列关于相似度度量的说法中，错误的是：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item 余弦相似度适合文本语义匹配，取值范围为 $[-1,1]$
+\item 欧氏距离对方向和模长都敏感，常用于图像特征匹配
+\item 内积结合方向与模长，在向量归一化后与余弦相似度等价
+\item 余弦相似度与内积在任何情况下都完全等价，无需归一化
+\end{enumerate}
+\begin{answer}
+\textbf{D}\quad 解析：内积与余弦相似度只有在向量归一化等条件下才等价，并非任何情况下都等价。
+\end{answer}
+
+\item 在向量数据库的完整检索流程中，“结果排序与后置过滤”阶段的主要作用是：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item 重新计算所有向量的精确距离
+\item 按距离升序排序候选结果，并结合元数据（时间范围、标签、权限等）剔除不符合业务规则的记录
+\item 压缩向量以减少存储
+\item 重建索引
+\end{enumerate}
+\begin{answer}
+\textbf{B}\quad 解析：该阶段按距离排序候选结果，并结合元数据过滤不符合业务规则的记录。
+\end{answer}
+
+\item 下列关于 RAG 系统质量问题的归因判断中，较为合理的是：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item RAG 效果差基本都是生成模型能力不足造成的
+\item 多数 RAG 失败可追溯到摄取（ingestion）阶段，如分块、清洗与嵌入质量问题
+\item 只要增大 top-$k$ 就一定能提升效果
+\item 检索阶段与生成阶段相互独立，互不影响
+\end{enumerate}
+\begin{answer}
+\textbf{B}\quad 解析：多数 RAG 失败可追溯到摄取阶段的分块、清洗与嵌入质量问题。
+\end{answer}
+
+\item 下列关于“数据库内置向量能力”与“独立部署向量数据库”比较的说法中，正确的是：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item 独立向量库没有任何运维成本
+\item 数据库内置向量能力可降低架构复杂度、避免多系统间的数据同步与一致性难题，并可用 SQL 统一访问结构化与向量数据
+\item 独立向量库天然保证与业务库的强一致
+\item 内置向量能力意味着不再需要嵌入模型
+\end{enumerate}
+\begin{answer}
+\textbf{B}\quad 解析：内置向量能力可降低架构复杂度、避免多系统数据同步与一致性难题，并可用 SQL 统一访问结构化与向量数据。
+\end{answer}
+
+\item 下列关于大模型与数据库结合的说法中，正确的是：
+\begin{enumerate}[label=\Alph*., leftmargin=2.2em, itemsep=1pt]
+\item NL2SQL 在复杂多表关联与业务口径计算上仍然容易出错，仍需人工审核
+\item RAG 完全消除了大模型幻觉
+\item 大模型可以取代 DBA
+\item 向量检索无法与关系数据融合在同一系统中
+\end{enumerate}
+\begin{answer}
+\textbf{A}\quad 解析：NL2SQL 在复杂多表关联与业务口径计算上仍易出错，需要人工审核。
+\end{answer}
+
+\end{enumerate}
+
+% ============================================================================
+\section{简答题}
+
+\begin{enumerate}
+
+% ---------- 1 ----------
+\item 试对半结构化数据（SSD）“无模式（schema-less）”的准确含义进行说明，并指出 SSD 模型带来的两点优势与两点代价。
+\begin{answer}
+\textbf{（1）“无模式（schema-less）”的准确含义}\par
+半结构化数据的“无模式”不是完全没有结构，而是指数据不需要预先定义统一、固定的模式；不同对象可以拥有不同属性，结构可动态变化，数据通常具有自描述能力。\par
+\textbf{（2）两点优势}\par
+① 灵活性强：可容纳不同结构、不同字段的数据，便于模式演化，适合 JSON、XML 等异构数据。\par
+② 减少模式变更与系统集成成本：新增字段不必修改全局模式，便于快速迭代和多源数据整合。\par
+\textbf{（3）两点代价}\par
+① 缺少统一的模式约束：容易出现数据不一致、字段缺失或类型混乱等质量问题。\par
+② 查询与优化复杂：结构解析、路径访问及索引维护会带来额外开销，优化器也难以像关系模式那样进行代价估计。
+\end{answer}
+
+% ---------- 2 ----------
+\item 本体语义模型与传统的实体-联系（E-R）模型在语义表达能力上有何本质区别？请结合课程内容，从“概念层次约束”和“推理支持”两个角度加以阐述。
+\begin{answer}
+\textbf{（1）概念层次约束：}E-R 模型主要描述实体、属性、联系及基数约束；本体模型除这些内容外，还可定义类的继承、等价、不相交，以及属性的定义域、值域和基数等约束，语义表达能力更强。\par
+\textbf{（2）推理支持：}E-R 模型主要用于数据库概念设计，本身不提供一般性的逻辑推理机制；本体模型可借助描述逻辑及 RDFS/OWL 等，根据已知事实和公理推导隐含知识，并检查知识的一致性。\par
+例如，已知“研究生属于学生”“张三是研究生”，本体推理可推出“张三是学生”。可见，本体模型更强调语义表达与知识推理，E-R 模型更强调数据结构与完整性约束。
+\end{answer}
+
+% ---------- 3 ----------
+\item 半结构化数据模型（以 JSON/XML 为代表）与图数据模型在表示“数据间引用”时采用了不同的机制。请回答：
+\begin{enumerate}
+\item 关系模型使用外键（FK）、半结构化模型使用嵌套或路径、图模型使用节点标识或边。请分别说明半结构化模型和图模型在表示引用时的典型方式，并指出各自的优缺点。
+\item 在什么场景下，图模型的引用机制比半结构化模型的嵌套机制更具优势？请举例说明。
+\end{enumerate}
+\begin{answer}
+\textbf{（1）引用方式及优缺点}\par
+半结构化模型（JSON/XML）主要用嵌套结构、路径表达式或 ID 引用表示对象间关系。优点是结构直观、适合层次化数据、读取局部子树方便；缺点是复杂多对多关系容易产生冗余，跨文档关联和多跳查询较繁琐。\par
+图模型通过节点标识符、边及边属性显式表示对象间联系。优点是能直接表达复杂关系，适合多跳遍历和路径查询；缺点是图结构维护、分布式存储及跨分区遍历可能带来额外开销。\par
+\textbf{（2）适用场景}\par
+当数据具有复杂多对多关系、需要频繁执行多跳关联查询时，图模型更具优势。例如在社交网络中查询“某用户的朋友的朋友”，图模型可沿好友关系边直接遍历；若用 JSON 嵌套，则需多次查找或维护重复数据。
+\end{answer}
+
+% ---------- 4 ----------
+\item Consider a B+ tree containing the elements $2,4,8,9,11,12,13,14,16,17,18,20$. The tree has order $d = 2$. This means that internal nodes have at least 2 keys and 3 pointers, and at most 4 keys and 5 pointers; leaf nodes have at least 2 data entries and at most 4 data entries.
+
+\noindent\textit{【中文翻译】}考虑一个包含元素 $2,4,8,9,11,12,13,14,16,17,18,20$ 的 B+ 树，阶数 $d=2$。即：内部节点至少有 2 个关键字和 3 个指针，至多有 4 个关键字和 5 个指针；叶节点至少有 2 条数据记录，至多有 4 条数据记录。
+
+\begin{enumerate}
+\item In the picture below, draw what the tree looks like if the leaves are as densely packed as possible. Draw directly on the picture.
+
+\noindent\textit{【中文翻译】}在下图中，画出叶节点尽可能紧密填充时树的结构（直接画在图上）。
+
+\begin{answer}
+12 个关键字可紧密地分为 3 个叶节点，每个叶节点 4 条记录（满足 2～4 条）。取右侧子树的最小关键字作为分隔键，根节点为 [11 | 16]，结构如下图：
+
+\begin{center}
+\begin{minipage}{\linewidth}\centering
+\includegraphics[width=0.95\linewidth]{fig-bplus-ans1.png}\\[2pt]
+{\small 图 1\quad 叶节点尽可能紧密填充后的 B+ 树}
+\end{minipage}
+\end{center}
+
+三个叶节点从左到右用链表指针相连（图中红色虚线箭头）。
+\end{answer}
+
+\item Based on your original tree from 1, what is the minimum number of inserts that could cause a root split?
+
+\noindent\textit{【中文翻译】}在你第 1 问画出的初始树的基础上，最少插入多少个关键字可能引起根节点分裂？
+
+\begin{answer}
+初始根节点有 2 个关键字，最多容纳 4 个，还差 3 个关键字才溢出。每次叶节点分裂只向根节点增加 1 个分隔关键字，因此最少需要：$(4-2)+1=3$ 次插入。两次叶分裂后根只有 4 个关键字，仍未超过上限；第三次叶分裂使根达到 5 个关键字，才发生根分裂。例如依次插入 6、15、21。
+\end{answer}
+
+\item Draw the tree just after the root has split with a minimum of insertions as you described in 2. Use any value you like that would cause the split. We have started you off by drawing the root and internal nodes; you need to fill them in and draw the leaves.
+
+\noindent\textit{【中文翻译】}按第 2 问所述的最少插入次数，画出根节点刚刚分裂后的树。可使用任意能引起分裂的值。题目已给出根节点和内部节点的轮廓，你需要补全内部节点并画出叶节点。
+
+\begin{answer}
+叶节点溢出（5 个关键字）时，前 $\lceil 5/2\rceil=3$ 个留在原节点，其余 2 个进入新节点，即左侧优先分配。依次插入 6、15、21，每次均插入已满的叶节点，使其分裂并向根增加一个分隔键，过程如下。\par
+① 插入 6：左叶 $[2,4,8,9]$ 溢出，排序后为 $[2,4,6,8,9]$，分裂为 $[2,4,6]$ 与 $[8,9]$，分隔键为 8，根变为 [8 | 11 | 16]。
+
+\begin{center}
+\begin{minipage}{\linewidth}\centering
+\includegraphics[width=0.92\linewidth]{fig-bplus-ins6.png}\\[2pt]
+{\small 图 2\quad 插入 6 之后}
+\end{minipage}
+\end{center}
+
+② 插入 15：叶 $[11,12,13,14]$ 溢出，排序后为 $[11,12,13,14,15]$，分裂为 $[11,12,13]$ 与 $[14,15]$，分隔键为 14，根变为 [8 | 11 | 14 | 16]。
+
+\begin{center}
+\begin{minipage}{\linewidth}\centering
+\includegraphics[width=0.92\linewidth]{fig-bplus-ins15.png}\\[2pt]
+{\small 图 3\quad 插入 15 之后}
+\end{minipage}
+\end{center}
+
+③ 插入 21：叶 $[16,17,18,20]$ 溢出，分裂为 $[16,17,18]$ 与 $[20,21]$，分隔键为 20，根临时变为 [8, 11, 14, 16, 20]，达到 5 个关键字，超过上限。根节点分裂：中间键 14 上升为新根，左右两个内部节点分别为 [8, 11] 和 [16, 20]。最终结构为：
+
+\begin{center}
+\begin{minipage}{\linewidth}\centering
+\includegraphics[width=0.92\linewidth]{fig-bplus-rootsplit.png}\\[2pt]
+{\small 图 4\quad 根节点分裂后的 B+ 树}
+\end{minipage}
+\end{center}
+\end{answer}
+\end{enumerate}
+
+% ---------- 5 ----------
+\item Given the B+ tree shown in Figure 1, draw the tree after deleting keys 19, 20, 24 in the given order.
+
+\begin{center}
+\begin{minipage}{\linewidth}\centering
+\includegraphics[width=0.55\linewidth]{fig-bplus-fig1.png}\\[2pt]
+{\small 图 5\quad Figure 1：待删除操作的初始 B+ 树}
+\end{minipage}
+\end{center}
+
+\noindent\textit{【中文翻译】}给定 Figure 1 所示的 B+ 树，按给定顺序依次删除关键字 19、20、24，画出删除后的树。
+
+\begin{answer}
+根据 Figure 1，初始树为：根节点 [19]；左内部节点 [5 | 14]，右内部节点 [24 | 33]；叶节点从左到右为 $[2,3]$、$[5,7,8]$、$[14,16,17]$、$[19,20,22]$、$[24,27,29]$、$[33,34,38,39]$。以下采用 $d=2$，非根内部节点至少 2 个关键字、叶节点至少 2 条记录，并取右子树最小关键字作为父节点分隔键。\par
+\textbf{① 删除 19}\par
+19 位于叶节点 $[19,20,22]$。删除后变为 $[20,22]$，仍有 2 条记录，未下溢，不需要借用或合并。该叶节点最小关键字由 19 变为 20，因此根节点分隔键由 19 更新为 20。
+
+\begin{center}
+\begin{minipage}{\linewidth}\centering
+\includegraphics[width=0.85\linewidth]{fig-bplus-del19.png}\\[2pt]
+{\small 图 6\quad 删除 19 之后}
+\end{minipage}
+\end{center}
+
+\textbf{② 删除 20}\par
+20 位于叶节点 $[20,22]$。删除后变为 $[22]$，只有 1 条记录，低于下限 2，发生下溢。将 $[22]$ 与右兄弟 $[24,27,29]$ 合并，得到 $[22,24,27,29]$，满足 2～4 条。\par
+合并后，右内部节点 [24 | 33] 只剩下两个子节点，低于非根内部节点至少 3 个指针的要求，发生下溢。根节点分隔键先由 20 更新为右子树新的最小关键字 22；再将左内部节点 [5 | 14] 与右内部节点 [33] 合并，键 22 落在两者之间，原根节点被删除。合并后的新根为 [5, 14, 22, 33]，树高减少一层。
+
+\begin{center}
+\begin{minipage}{\linewidth}\centering
+\includegraphics[width=0.9\linewidth]{fig-bplus-del20.png}\\[2pt]
+{\small 图 7\quad 删除 20 之后（根节点合并，树高降低）}
+\end{minipage}
+\end{center}
+
+\textbf{③ 删除 24}\par
+24 位于叶节点 $[22,24,27,29]$。删除后变为 $[22,27,29]$，仍有 3 条记录，满足 2～4 条，不需要借用或合并。该叶节点最小关键字仍为 22，因此根节点的分隔键不需要修改。
+
+\begin{center}
+\begin{minipage}{\linewidth}\centering
+\includegraphics[width=0.9\linewidth]{fig-bplus-del24.png}\\[2pt]
+{\small 图 8\quad 删除 24 之后的最终树}
+\end{minipage}
+\end{center}
+
+\textbf{最终结果}\par
+根节点为 [5, 14, 22, 33]；叶节点从左到右为 $[2,3]\rightarrow[5,7,8]\rightarrow[14,16,17]\rightarrow[22,27,29]\rightarrow[33,34,38,39]$。
+
+\medskip
+\noindent\textbf{卷面可写（英文简答）}
+\begin{quote}\small
+① Delete 19: $[19,20,22]\rightarrow[20,22]$; no underflow; update the root separator from 19 to 20.\par
+② Delete 20: $[20,22]\rightarrow[22]$; underflow; merge with the right sibling to obtain $[22,24,27,29]$. The parent internal node then underflows; merge the internal nodes and remove the old root, reducing the tree height. The new root is [5, 14, 22, 33].\par
+③ Delete 24: $[22,24,27,29]\rightarrow[22,27,29]$; no underflow.\par
+Final: root [5, 14, 22, 33]; leaves $[2,3]\rightarrow[5,7,8]\rightarrow[14,16,17]\rightarrow[22,27,29]\rightarrow[33,34,38,39]$.
+\end{quote}
+说明：删除 20 时也可以先向右兄弟借用 24，而不立即合并；这样在随后删除 24 时该叶节点会再次下溢并触发合并，最终仍得到上述根节点和叶节点。两种路线在允许借用/合并的教材规则下都成立。
+\end{answer}
+
+% ---------- 6 ----------
+\item 试解释 LSM 树的写放大、读放大、空间放大分别由什么引起，并说明 Compaction 如何在三者之间做权衡。
+\begin{answer}
+\textbf{（1）写放大：}数据在 MemTable 刷盘以及多级 SSTable 压缩合并时被反复读写，产生额外 I/O。\par
+\textbf{（2）读放大：}同一键的数据可能分布在 MemTable 和多个 SSTable 中，读取时需逐层检查多个文件。\par
+\textbf{（3）空间放大：}同一键的多个版本、删除标记及尚未回收的旧数据占用额外存储空间。\par
+Compaction 通过合并 SSTable、清除过期版本和删除标记来回收空间，从而降低读放大与空间放大；但合并过程本身要重写数据，会增加写放大。\par
+Size-Tiered Compaction 通常写放大较低，但读放大和空间放大较高；Leveled Compaction 通常读放大和空间放大较低，但写放大较高。实际系统需根据读写负载在三者之间权衡。
+\end{answer}
+
+% ---------- 7 ----------
+\item 某系统需用布隆过滤器对 $n=10^{7}$ 个 URL 做去重，要求误判率 $p \leq 1\%$。
+\begin{enumerate}
+\item 计算所需位数组长度 $m$ 及最优哈希函数个数 $k$（要求给出算式与近似取值，$\ln 2 \approx 0.693$，$\ln 0.01 \approx -4.605$）。
+\begin{answer}
+由误判率公式 $p \approx \left(1-e^{-kn/m}\right)^{k}$，在 $p$ 给定时最优参数为：
+\[
+m = -\frac{n\ln p}{(\ln 2)^{2}} = -\frac{10^{7}\times(-4.605)}{0.693^{2}} \approx 9.59\times 10^{7}\ \text{bit}
+\]
+\[
+k = \frac{m}{n}\ln 2 \approx \frac{9.59\times 10^{7}}{10^{7}}\times 0.693 \approx 6.64,\quad \text{取 } k=7
+\]
+即约需 $9.59\times 10^{7}$ 个二进制位，最优哈希函数个数为 7。
+\end{answer}
+
+\item 计算此时的实际内存占用（按 bit 换算为 MB，$1\ \text{MB} = 8\times 10^{6}$ bit 亦可自行说明换算）。
+\begin{answer}
+\[
+M = \frac{9.59\times 10^{7}}{8\times 10^{6}} \approx 11.98\ \text{MB}
+\]
+即约 12 MB（按 $1\ \text{MB}=8\times 10^{6}$ bit 换算）。
+\end{answer}
+
+\item 若内存预算被压缩到只有 2) 的一半，为保持误判率不变，可采取哪些措施？至少给出两条并简述代价。
+\begin{answer}
+标准布隆过滤器在 $n$、$p$ 不变时，最小位数组长度 $m$ 是确定的，仅调整 $k$ 不能把内存减半并保持原误判率，因此需从其他途径入手：\par
+\textbf{措施一：减少需要存储的元素数。}例如先做分区、去重或缩小过滤集合，使每个过滤器的 $n$ 减半。代价是增加预处理、去重与分区管理成本，且需保证查询时能定位到正确分区。\par
+\textbf{措施二：改用更紧凑的变体或组合结构，}如压缩布隆过滤器、分层/分块过滤器，或对冷数据降低精度要求。代价是实现复杂度提高，查询与更新开销增加，效果取决于数据分布。\par
+若坚持使用标准布隆过滤器且 $n$、$p$ 不变，则无法把内存减半。
+\end{answer}
+\end{enumerate}
+
+% ---------- 8 ----------
+\item 设关系 $r_1(A,B,C)$、$r_2(C,D,E)$ 有如下特性：$r_1$ 有 200,000 个元组，$r_2$ 有 45,000 个元组，一块中可容纳 25 个 $r_1$ 元组或 30 个 $r_2$ 元组；试估算以下每一种策略计算 $r_1 \bowtie r_2$ 所需存取的块数（假设可用于连接操作的内存数量为 300 个块）：
+\begin{enumerate}
+\item 块嵌套循环连接
+\begin{answer}
+每块可容纳的元组数：$r_1$ 为 25，$r_2$ 为 30，因此 $B(r_1)=200000/25=8000$ 块，$B(r_2)=45000/30=1500$ 块。内存共 300 块，块嵌套循环连接每次可读入 $M-2=298$ 块外关系。\par
+以 $r_1$ 为外关系：
+\[
+\begin{aligned}
+C &= B(r_1) + \left\lceil \frac{B(r_1)}{M-2} \right\rceil \times B(r_2) \\
+  &= 8000 + \left\lceil \frac{8000}{298} \right\rceil \times 1500
+   = 8000 + 27\times 1500 = 48500\ \text{块 I/O}
+\end{aligned}
+\]
+以 $r_2$ 为外关系：
+\[
+C = 1500 + \left\lceil \frac{1500}{298} \right\rceil \times 8000
+  = 1500 + 6\times 8000 = 49500\ \text{块 I/O}
+\]
+取较小者，最优为 48500 块 I/O（$r_1$ 为外关系）。
+\end{answer}
+
+\item 归并连接（假设 $r_1$、$r_2$ 已按连接属性排序）
+\begin{answer}
+两关系已按连接属性有序，无需排序，只需各顺序扫描一遍：
+\[
+C = B(r_1)+B(r_2) = 8000+1500 = 9500\ \text{块 I/O}
+\]
+\end{answer}
+
+\item 混合散列连接（假设分 5 路进行散列并且没有偏斜）
+\begin{answer}
+5 路散列时，构建关系 $r_2$ 的每个分区约为 $1500/5=300$ 块。题目给出的内存只有 300 块，而散列连接还需要为输入缓冲、输出缓冲和哈希表预留空间，因此严格按内存约束，无法完整保留一个 300 块的分区，不能直接套用“一个分区常驻内存”的 24,700 块 I/O。\par
+普通两趟（Grace）散列连接的基准代价为：
+\[
+C = 3\bigl(B(r_1)+B(r_2)\bigr) = 3\times(8000+1500)=28500\ \text{块 I/O}
+\]
+若题目或老师明确假设 5 路中有 1 路可完整常驻内存（并忽略缓冲区开销），则混合散列连接可省去该分区的写出与读回：
+\[
+C = \bigl(B(r_1)+B(r_2)\bigr) + 2\times\frac{4}{5}\times\bigl(B(r_1)+B(r_2)\bigr)
+  = 9500+15200 = 24700\ \text{块 I/O}
+\]
+两者的差别来自内存分配假设，不是算术错误。严格按 300 块内存约束，应采用 28,500；若采用理想化假设，则为 24,700。
+\end{answer}
+\end{enumerate}
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+算法 & I/O 代价（块） \\
+\midrule
+块嵌套循环连接（$r_1$ 为外关系） & 48500 \\
+归并连接 & 9500 \\
+混合散列连接（严格内存约束，两趟散列基准） & 28500 \\
+混合散列连接（假设一个分区常驻内存） & 24700 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent 注：块嵌套循环中取 $r_1$ 为外关系反而更省，因为 $8000/298$ 向上取整为 27，而 $1500/298$ 向上取整为 6；虽然 $r_2$ 更小，但 $6\times 8000$ 已大于 $27\times 1500$。教材也强调应结合缓冲块数与扫描次数确定最佳外关系，不能简单认定小关系作外关系一定更优。
+
+% ---------- 9 ----------
+\item Consider the relations $r_1(A,B,C)$, $r_2(C,D,E)$, and $r_3(E,F)$, with primary keys $A$, $C$, and $E$, respectively. Assume that $r_1$ has 1000 tuples, $r_2$ has 1500 tuples, and $r_3$ has 750 tuples. Estimate the size of $r_1\bowtie r_2\bowtie r_3$.
+
+\noindent\textit{【中文翻译】}考虑关系 $r_1(A,B,C)$、$r_2(C,D,E)$、$r_3(E,F)$，其主键分别为 $A$、$C$、$E$。假设 $r_1$ 有 1000 个元组，$r_2$ 有 1500 个元组，$r_3$ 有 750 个元组。估算 $r_1\bowtie r_2\bowtie r_3$ 的结果元组数。
+
+\begin{answer}
+$r_2$ 的主键为 $C$，因此 $r_1$ 的每个元组在 $r_2$ 中至多匹配一个元组：$|r_1\bowtie r_2| \leq 1000$。\par
+$r_3$ 的主键为 $E$，继续连接同样至多匹配一个 $r_3$ 元组，元组数不会增加：$|r_1\bowtie r_2\bowtie r_3| \leq 1000$。\par
+若进一步假设 $r_1.C$ 引用 $r_2.C$、$r_2.E$ 引用 $r_3.E$（外键引用完整，且连接不丢失元组），则每个元组都能匹配到一条记录，估计值为：
+\[
+|r_1\bowtie r_2\bowtie r_3| = 1000
+\]
+\textbf{卷面建议表述：}结果最多 1000 条；若假设外键引用完整，则估计为 1000 条。仅凭主键信息不能保证精确等于 1000，因此不宜直接写“等于 1000”而不交代前提。
+\end{answer}
+
+% ---------- 10 ----------
+\item Consider the relations $r_1(A,B,C)$, $r_2(C,D,E)$, and $r_3(E,F)$. Assume that there are no primary keys, except the entire schema. Let $V(C,r_1)$ be 900, $V(C,r_2)$ be 1100, $V(E,r_2)$ be 50, and $V(E,r_3)$ be 100. Assume that $r_1$ has 1000 tuples, $r_2$ has 1500 tuples, and $r_3$ has 750 tuples. Estimate the size of $r_1\bowtie r_2\bowtie r_3$.
+
+\noindent\textit{【中文翻译】}考虑关系 $r_1(A,B,C)$、$r_2(C,D,E)$、$r_3(E,F)$。假设除整个模式外没有其他主键。设 $V(C,r_1)=900$、$V(C,r_2)=1100$、$V(E,r_2)=50$、$V(E,r_3)=100$；$r_1$ 有 1000 个元组，$r_2$ 有 1500 个元组，$r_3$ 有 750 个元组。估算 $r_1\bowtie r_2\bowtie r_3$ 的结果元组数。
+
+\begin{answer}
+无主键时，用连接属性上的不同值个数估计：
+\[
+|r_1\bowtie r_2| \approx \frac{T(r_1)\cdot T(r_2)}{\max\bigl(V(C,r_1),V(C,r_2)\bigr)}
+= \frac{1000\times 1500}{1100} \approx 1363.64
+\]
+\[
+|r_1\bowtie r_2\bowtie r_3| \approx \frac{1363.64\times 750}{\max\bigl(V(E,r_2),V(E,r_3)\bigr)}
+= \frac{1363.64\times 750}{100} \approx 10227
+\]
+即约 10227 条元组。
+\end{answer}
+
+% ---------- 11 ----------
+\item Consider the relation LEG(source, destination), recording non-stop flight-legs from one airport ('source') to another ('destination'). Assume that it contains $n=1{,}000$ tuples. Consider the query to find all airports within two hops from Pittsburgh (keep the duplicates, for simplicity):
+
+\begin{quote}\ttfamily\small
+select L2.destination\par
+from LEG as L1, LEG as L2\par
+where L1.destination = L2.source and\par
+\qquad L1.source = 'Pittsburgh'
+\end{quote}
+
+Estimate the number of output tuples for the above query if we have 100 distinct airports, that is $V(\text{LEG},\text{source}) = V(\text{LEG},\text{destination}) = 100$.
+
+\noindent\textit{【中文翻译】}考虑关系 LEG(source, destination)，它记录从一个机场（source）到另一个机场（destination）的直飞航段，假设共有 $n=1000$ 个元组。考虑查询：找出距匹兹堡两跳以内的所有机场（为简化起见，保留重复元组）。若共有 100 个不同的机场，即 $V(\text{LEG},\text{source})=V(\text{LEG},\text{destination})=100$，估算上述查询的输出元组数。
+
+\noindent\textit{Hint: First, estimate the number of tuples in the self-join.}\quad
+\noindent\textit{【中文翻译】}提示：先估算自连接后的元组数。
+
+\begin{answer}
+先估计自连接：
+\[
+|\text{LEG}\bowtie \text{LEG}| \approx \frac{T(\text{LEG})\cdot T(\text{LEG})}{\max\bigl(V(\text{source}),V(\text{destination})\bigr)}
+= \frac{1000\times 1000}{100} = 10000
+\]
+再考虑条件 \texttt{L1.source = 'Pittsburgh'}。假设航班均匀分布在 100 个机场上，选择率为 $1/100$：
+\[
+10000\times \frac{1}{100} = 100
+\]
+输出约 100 条元组。
+\end{answer}
+
+% ---------- 12 ----------
+\item 布谷鸟过滤器使用两个桶（bucket），每个桶容量为 1 个槽位。元素 $x$ 的两个候选桶位置为：
+\[
+i_1 = h(x)\bmod 4, \qquad i_2 = \bigl(i_1 \oplus h(x)\bigr)\bmod 4
+\]
+设 4 个元素 A、B、C、D 的候选桶位置如下表（已给定，无需计算哈希）：
+
+\begin{center}
+\begin{tabular}{@{}ccc@{}}
+\toprule
+元素 & $i_1$ & $i_2$ \\
+\midrule
+A & 0 & 1 \\
+B & 0 & 2 \\
+C & 1 & 3 \\
+D & 2 & 3 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+按 A $\rightarrow$ B $\rightarrow$ C $\rightarrow$ D 的顺序依次插入。
+
+\begin{enumerate}
+\item 请推演插入过程，指出在插入哪个元素时发生“踢出”（eviction），并给出每次踢出后各桶的占用情况。
+\begin{answer}
+题目未规定“候选桶都占用时”的策略，答案取决于实现策略，需先说明。\par
+\textbf{策略一：先检查两个候选桶，有空位就放入}
+
+\begin{center}
+\begin{tabular}{@{}ccccc@{}}
+\toprule
+步骤 & 桶 0 & 桶 1 & 桶 2 & 桶 3 \\
+\midrule
+插入 A & A & 空 & 空 & 空 \\
+插入 B & A & 空 & B & 空 \\
+插入 C & A & C & B & 空 \\
+插入 D & A & C & B & D \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+按此策略，四个元素均能找到空桶，不会发生踢出。\par
+\textbf{策略二：总是先放 $i_1$，冲突则踢出原元素}\par
+① 插入 A：$i_1=0$，桶 0 空，A $\rightarrow$ 桶 0。\par
+② 插入 B：$i_1=0$ 被 A 占用，踢出 A，B $\rightarrow$ 桶 0；A 移入其另一候选桶 1，A $\rightarrow$ 桶 1。（首次踢出）\par
+③ 插入 C：$i_1=1$ 被 A 占用，踢出 A，C $\rightarrow$ 桶 1；A 的另一候选桶 0 被 B 占用，踢出 B，A $\rightarrow$ 桶 0；B 的另一候选桶 2 为空，B $\rightarrow$ 桶 2。（2 次踢出）\par
+④ 插入 D：$i_1=2$ 被 B 占用，踢出 B，D $\rightarrow$ 桶 2；B 的另一候选桶 0 被 A 占用，踢出 A，B $\rightarrow$ 桶 0；A 的另一候选桶 1 被 C 占用，踢出 C，A $\rightarrow$ 桶 1；C 的另一候选桶 3 为空，C $\rightarrow$ 桶 3。（3 次踢出）\par
+最终：桶 0 = B，桶 1 = A，桶 2 = D，桶 3 = C，所有元素均成功放置。因此“何时发生踢出”取决于策略：按策略一不会踢出；按策略二在插入 B、C、D 时均发生踢出。若按多数教材采用的“优先放 $i_1$”策略，则从插入 B 开始发生踢出。
+\end{answer}
+
+\item 若踢出过程中形成循环（即被踢出的元素又回到其原桶），说明系统应如何处理。
+\begin{answer}
+应设置最大踢出次数（如数百次）。若超过阈值仍无法插入，则判定插入失败：扩容（桶数组加倍）或更换哈希函数重新哈希，并保证所有元素重新插入，最后恢复一致的过滤器状态，避免遗漏已存在元素。
+\end{answer}
+
+\item 与布隆过滤器相比，布谷鸟过滤器为何天然支持删除？请结合其存储结构说明。
+\begin{answer}
+布谷鸟过滤器在每个桶中直接存储元素的短指纹。删除时计算该元素的两个候选桶，找到匹配指纹并清除即可，不需要像普通布隆过滤器那样对多个元素共享的位清零，因此可以安全地支持删除。\par
+需要说明：布谷鸟过滤器仍存在指纹碰撞，删除一个未插入的元素时可能误删指纹相同的其他元素；实际系统通过更长的指纹降低该概率。普通布隆过滤器则因多个元素共享同一些位，直接清 0 会破坏其他元素的成员信息，不能安全删除。
+\end{answer}
+\end{enumerate}
+
+% ---------- 13 ----------
+\item 设跳表（Skip List）当前结构如下（层数从上到下，每层为有序链表；$\rightarrow$ 表示指针）：
+
+\begin{quote}\ttfamily\small
+L3：head $\rightarrow$ 10 $\rightarrow$ null\par
+L2：head $\rightarrow$ 10 $\rightarrow$ 30 $\rightarrow$ null\par
+L1：head $\rightarrow$ 10 $\rightarrow$ 20 $\rightarrow$ 30 $\rightarrow$ 50 $\rightarrow$ null\par
+L0：head $\rightarrow$ 5 $\rightarrow$ 10 $\rightarrow$ 20 $\rightarrow$ 30 $\rightarrow$ 40 $\rightarrow$ 50 $\rightarrow$ null
+\end{quote}
+
+\begin{enumerate}
+\item 请写出查找关键字 40 的完整搜索路径（从最高层开始，逐层下降），并统计比较次数。
+\begin{answer}
+从最高层开始，遇到大于目标的关键字或到达 null 就下降：
+\begin{quote}\ttfamily\small
+L3：head $\rightarrow$ 10 $\rightarrow$ null\quad（比较 10）\par
+L2：10 $\rightarrow$ 30 $\rightarrow$ null\quad（比较 30）\par
+L1：30 $\rightarrow$ 50 $\rightarrow$ null\quad（比较 50，$50>40$，下降）\par
+L0：30 $\rightarrow$ 40\quad（比较 40，找到）
+\end{quote}
+搜索路径为 L3:10 $\rightarrow$ L2:10 $\rightarrow$ L2:30 $\rightarrow$ L1:30 $\rightarrow$ L0:30 $\rightarrow$ L0:40，共进行 4 次关键字比较。若实现方式在每层下降时重复比较当前节点，计数可能略有不同，但搜索路径相同。
+\end{answer}
+
+\item 现要插入关键字 35，假设其随机层数为 2（即出现在 L0 和 L1）。请描述插入操作需要修改哪些指针，并写出插入后 L0 和 L1 的内容。
+\begin{answer}
+35 应插入 30 与 40 之间，且随机层数为 2，即出现在 L0、L1。需要修改：\par
+L0：30.next = 35，35.next = 40；\par
+L1：30.next = 35，35.next = 50；\par
+同时建立 35 在 L0 与 L1 之间的垂直指针。插入后：
+\begin{quote}\ttfamily\small
+L1：head $\rightarrow$ 10 $\rightarrow$ 20 $\rightarrow$ 30 $\rightarrow$ 35 $\rightarrow$ 50 $\rightarrow$ null\par
+L0：head $\rightarrow$ 5 $\rightarrow$ 10 $\rightarrow$ 20 $\rightarrow$ 30 $\rightarrow$ 35 $\rightarrow$ 40 $\rightarrow$ 50 $\rightarrow$ null
+\end{quote}
+\end{answer}
+
+\item 跳表的期望时间复杂度为 $O(\log n)$，其前提假设是什么？若随机层数生成不均匀（例如绝大多数元素只有 L0），性能会退化到什么程度？
+\begin{answer}
+\textbf{前提假设：}每个节点的层数独立随机生成，通常按几何分布，每次继续升层的概率为 $p=1/2$，从而使第 $i+1$ 层节点数约为第 $i$ 层的一半。此时期望时间复杂度为 $O(\log n)$。\par
+若绝大多数节点只有 L0，跳表退化为普通有序链表，查找、插入、删除的期望及最坏时间复杂度都可能退化为 $O(n)$。
+\end{answer}
+\end{enumerate}
+
+% ---------- 14 ----------
+\item 某 LSM 树存储引擎的参数如下：内存表（MemTable）阈值为 4 条记录；采用分层压缩（leveled compaction），L0 最多允许 2 个 SSTable，超过则触发压缩合并到 L1。初始状态为空。依次写入以下键值对（键为整数）：
+\[
+(1,a)\ (2,b)\ (3,c)\ (4,d)\ (5,e)\ (6,f)\ (2,b')\ (7,g)
+\]
+
+\begin{enumerate}
+\item 请推演写入过程，指出每次 MemTable 刷写产生哪些 SSTable，以及何时触发 L0$\rightarrow$L1 的压缩。
+\begin{answer}
+MemTable 达到 4 条记录即刷盘：\par
+① 写入 $(1,a)$、$(2,b)$、$(3,c)$、$(4,d)$ 后刷盘，生成 SSTable 1（有序）：$(1,a)$、$(2,b)$、$(3,c)$、$(4,d)$。\par
+② 继续写入 $(5,e)(6,f)(2,b')(7,g)$，MemTable 再次达到 4 条，刷盘生成 SSTable 2：$(2,b'),(5,e),(6,f),(7,g)$。\par
+此时 L0 共有 2 个 SSTable，未超过“最多 2 个”的限制，因此不触发 L0$\rightarrow$L1 的 Compaction；MemTable 为空。\par
+L0（新$\rightarrow$旧）：
+\begin{quote}\ttfamily\small
+SSTable 2 [(2,b'),(5,e),(6,f),(7,g)]\par
+\quad $\rightarrow$ SSTable 1 [(1,a),(2,b),(3,c),(4,d)]
+\end{quote}
+L1：空
+\end{answer}
+
+\item 写入 $(2,b')$ 后，键 2 存在两个版本（$b$ 和 $b'$）。在读取键 2 时，引擎如何确定应返回哪个版本？请说明读取路径中“版本判定”的依据。
+\begin{answer}
+读取键 2 时，按“由新到旧”的顺序检查：MemTable（空）$\rightarrow$ Immutable MemTable（无）$\rightarrow$ L0 中较新的 SSTable 2 $\rightarrow$ 较旧的 SSTable 1。\par
+SSTable 2 中存在 $(2,b')$，其写入序列号/时间戳晚于 SSTable 1 中的 $(2,b)$，因此以最新版本为准。\par
+返回 $(2,b')$。
+\end{answer}
+
+\item 若压缩策略改为“仅在 L0 达到 4 个 SSTable 时合并”，对读放大和写放大分别有何影响？
+\begin{answer}
+\textbf{读放大增大：}L0 中可积累更多 SSTable，点查需检查更多文件；虽有布隆过滤器可减少部分无效 I/O，但最坏情况仍需多次查找。\par
+\textbf{写放大降低：}合并触发频率下降，数据被重复重写的次数减少。\par
+代价是空间放大可能增加，因为旧版本与冗余数据保留更久。总体上是以读放大和空间放大换取写放大降低。
+\end{answer}
+\end{enumerate}
+
+% ---------- 15 ----------
+\item 布隆过滤器和布谷鸟过滤器在数据库系统（尤其是 LSM 树的读取路径）中常被用作“预筛选”组件。请回答：
+\begin{enumerate}
+\item 在 LSM 树中，布隆过滤器通常被用来解决什么问题？其作用机制是什么？
+\item 布谷鸟过滤器相比布隆过滤器在数据库场景中具有哪些优势？为什么这些优势在实际系统中具有吸引力？
+\end{enumerate}
+\begin{answer}
+\textbf{（1）布隆过滤器解决的问题：}LSM 树的数据分散在 MemTable 和多个 SSTable 中，点查询若逐个文件查找会产生大量无效磁盘 I/O。为每个 SSTable 建立布隆过滤器后，查询某键时先检查对应过滤器：若任一哈希位为 0，说明该键一定不在该 SSTable 中，可直接跳过；若全部为 1，才需要读取该文件进一步确认。其主要作用是减少无效 SSTable 读取，降低读放大。\par
+\textbf{（2）布谷鸟过滤器的优势：}存储短指纹而非位数组，可支持删除；在相同误判率与负载下空间效率较好；查询最多检查两个桶，查找开销稳定。这些特性适合动态集合、缓存穿透防护和设备上下线管理等场景。不过对于不可变的 SSTable，普通布隆过滤器已足够适用，布谷鸟过滤器并非必需。
+\end{answer}
+
+% ---------- 16 ----------
+\item 从云原生数据库到 AI 原生数据库，数据库系统的“用户假设”和“负载假设”正在发生根本性变化。请回答：
+\begin{enumerate}
+\item 云原生数据库的核心架构设计（如计算存储分离、无状态计算层）主要解决了传统数据库在云环境下的哪些问题？
+\item 当 AI Agent 成为数据库的重要使用者时，其访问模式与人类开发者有何本质不同？请至少从两个维度加以说明。
+\item 基于上述差异，AI Native 数据库在架构设计上需要做出哪些针对性调整？请提出至少两项设计方向并简要解释理由。
+\end{enumerate}
+\begin{answer}
+\textbf{（1）云原生数据库解决的问题}\par
+传统数据库计算与存储紧耦合：扩容需迁移大量数据，资源弹性差，副本成本高，运维复杂。云原生数据库通过计算存储分离、无状态计算层和集中式控制平面，实现：计算与存储独立扩展；计算节点快速扩缩；多个计算节点共享同一份存储，降低副本成本；自动部署、故障恢复与弹性调度。\par
+\textbf{（2）AI Agent 与人类开发者的访问差异}\par
+① 访问频率与并发：人类通常以交互方式低频提交查询；AI Agent 可能自动、高频、并行地产生大量请求。\par
+② 查询类型：传统应用以结构化 SQL 为主；AI Agent 还需要自然语言查询、向量相似性检索、多步推理与工具调用。\par
+③ 负载可预测性：传统业务查询模式相对稳定；AI Agent 的工作流动态生成、可能包含多阶段复杂查询，难以预测。\par
+\textbf{（3）AI Native 数据库的针对性调整}\par
+① 原生支持向量数据类型、ANN 索引与多模态检索，直接服务 RAG 与语义查询。\par
+② 集成 NL2SQL、库内 AI 算子与模型调用能力，使自然语言查询与结构化查询统一执行。\par
+③ 提供自适应查询优化、负载隔离与资源调度，适应高并发、动态化的 Agent 负载。\par
+④ 强化身份鉴别、细粒度授权与执行审计，降低自动生成 SQL 和自主操作带来的安全风险。
+\end{answer}
+
+\end{enumerate}
+
+% ============================================================================
+\section{综合设计题}
+
+\begin{enumerate}
+
+% ---------- 1 ----------
+\item 某学术 collaboration 平台需要存储和管理以下数据：
+
+\begin{itemize}
+\item 研究人员（Researcher）：属性有姓名（name）、所属机构（affiliation）
+\item 论文（Paper）：属性有标题（title）、发表年份（year）
+\item 研究主题（Topic）：有名称（name）
+\item 关系：研究者撰写论文（可标注作者顺序）；论文涉及研究主题；研究者合作过其他研究者（合作关系由共同撰写论文隐含产生，也可显式存储合作次数）
+\end{itemize}
+
+平台需要支持以下两类查询：
+
+\begin{itemize}
+\item 查询 A：“找出与研究者 X 有合作关系的所有研究者，以及他们合作发表的论文标题”
+\item 查询 B：“统计过去五年中，每个研究主题下发表论文的总数”
+\end{itemize}
+
+请完成以下设计任务：
+
+\begin{enumerate}
+\item 请分别用半结构化数据模型（JSON 文档）和属性图模型给出上述数据的概念设计草图（文字描述即可），并指出两种设计在表达“作者顺序”和“合作关系”时的关键差异。
+\item 针对查询 A 和查询 B，分别判断哪种数据模型更适合，并简要说明理由。
+\end{enumerate}
+
+\begin{answer}
+\textbf{（1）两种概念设计}\par
+\textbf{① 半结构化 JSON 模型：}以论文为文档，嵌套保存作者、作者顺序与研究主题。
+\begin{quote}\ttfamily\small
+\{\\
+\ \ "paperId": "P001",\\
+\ \ "title": "Database Research",\\
+\ \ "year": 2026,\\
+\ \ "authors": [\\
+\ \ \ \ \{"researcherId": "R001", "name": "Alice",\\
+\ \ \ \ \ \ "affiliation": "University A", "order": 1\},\\
+\ \ \ \ \{"researcherId": "R002", "name": "Bob",\\
+\ \ \ \ \ \ "affiliation": "University B", "order": 2\}\\
+\ \ ],\\
+\ \ "topics": ["Database", "AI"]\\
+\}
+\end{quote}
+作者顺序可由数组顺序或 order 字段表达；合作关系通过共同出现在同一篇论文的作者列表中推导。\par
+\textbf{② 属性图模型：}
+\begin{quote}\small
+节点：\\
+\quad Researcher(id, name, affiliation)\\
+\quad Paper(id, title, year)\\
+\quad Topic(id, name)\\[4pt]
+边：\\
+\quad Researcher $\xrightarrow{\text{AUTHORED }\{\text{order}\}}$ Paper\\
+\quad Paper $\xrightarrow{\text{HAS\_TOPIC}}$ Topic\\
+\quad Researcher $\xrightarrow[\text{\{count\}}]{\text{COLLABORATED\_WITH}}$ Researcher
+\end{quote}
+\textbf{关键差异：}JSON 用嵌套数组表达作者顺序，合作关系通常需通过共享论文计算，跨文档关联要用 ID 引用；属性图用 AUTHORED 边的 order 属性直接表达作者顺序，用 COLLABORATED\_WITH 边直接表示合作关系并保存合作次数，更适合多跳查询。\par
+\textbf{（2）查询与模型选择}\par
+\textbf{查询 A}（与 X 有合作关系的所有研究者及合作论文标题）：更适合属性图模型。研究者与论文是多对多关系，图模型可沿 AUTHORED 边和合作关系边直接遍历，避免复杂的嵌套查询与重复数据。\par
+\textbf{查询 B}（统计过去五年每个研究主题的论文总数）：更适合半结构化 JSON 文档聚合方案（论文文档已含 year 与 topics 字段时），可直接按年份过滤、展开主题数组、分组计数。\par
+需要说明：图模型同样可以通过 Paper$\rightarrow$Topic 关系完成查询 B；若平台主要面向关系分析，也可统一采用属性图模型。两种模型不存在绝对的性能优劣，应结合查询模式选择。
+\end{answer}
+
+% ---------- 2 ----------
+\item 某团队要搭建一个 AI 智能运维平台，需支撑以下四类负载：
+
+\begin{itemize}
+\item 负载 ①（时序指标）：每秒数百万条监控指标写入，几乎不更新，偶发按时间范围与标签查询；
+\item 负载 ②（日志与告警文本）：写入量大，需支持关键词检索与语义检索；
+\item 负载 ③（缓存穿透防护）：海量不存在的租户 ID/设备 ID 查询需在数据库前拦截，且设备会随时上下线（需要能在集合中删除）；
+\item 负载 ④（自然语言问数）：运维人员用自然语言询问“上周哪些实例的慢 SQL 最集中”，需生成 SQL 并给出解释。
+\end{itemize}
+
+请完成以下任务：
+
+\begin{enumerate}
+\item \textbf{存储引擎与数据结构选型}\par
+为负载 ①、②、③ 各选择合适的技术并说明理由；其中负载 ① 请说明为何选 LSM 类引擎而非 B+ 树，并说明应偏好哪种 Compaction 策略。
+\begin{answer}
+\begin{center}
+\begin{tabular}{@{}p{0.14\linewidth}p{0.32\linewidth}p{0.44\linewidth}@{}}
+\toprule
+负载 & 技术选型 & 理由 \\
+\midrule
+① 时序指标 & LSM 树类存储引擎（时间分区 SSTable） & 写入量大、几乎不更新；MemTable 缓冲＋顺序写 SSTable，适合按时间范围与标签查询 \\
+② 日志与告警文本 & LSM 存储＋倒排索引＋向量索引 & 同时支持高吞吐写入、关键词检索与语义检索 \\
+③ 缓存穿透防护 & 布谷鸟过滤器 & 快速判断 ID 是否存在，并支持设备上下线时的动态删除 \\
+\bottomrule
+\end{tabular}
+\end{center}
+负载 ① 选 LSM 而非 B+ 树：监控指标写入量大、更新少，LSM 把随机写转为顺序写，写入吞吐高；B+ 树的随机写与页分裂开销较大。\par
+Compaction 策略应优先采用 Size-Tiered Compaction 以降低写放大，并结合时间分区与过期数据清理；若对查询延迟要求较高，可对部分层级采用 Leveled Compaction。
+\end{answer}
+
+\item \textbf{过滤器选型与设计}\par
+针对负载 ③，说明应选布隆过滤器还是布谷鸟过滤器，给出理由；若采用布谷鸟过滤器，说明“桶大小必须为 2 的幂”这一限制来自哪里，以及高负载因子（如 95\%）下有何风险。
+\begin{answer}
+应选布谷鸟过滤器。负载 ③ 不仅需要拦截不存在的 ID，还要求设备上下线时能动态删除元素；普通布隆过滤器不能直接安全删除，而布谷鸟过滤器存储指纹，可从候选桶中删除。\par
+“桶大小为 2 的幂”来自异或寻址：备用桶位置按 $i_2 = i_1 \oplus h(\text{fingerprint})$ 计算。只有桶数组长度为 2 的幂时，异或结果才能保证仍落在数组范围内，并且由任一候选桶都能推导出另一个候选桶。\par
+当负载因子达到 95\% 时，空闲槽位极少，插入可能触发很长的踢出链，导致插入延迟上升甚至失败；此时需要扩容（桶数组加倍）并重新哈希。
+\end{answer}
+
+\item \textbf{AI 能力设计}\par
+针对负载 ④，说明 NL2SQL 的主要技术环节（至少三步），并指出这类能力在生产环境中的两项主要局限及应对措施。
+\begin{answer}
+\textbf{NL2SQL 的主要环节：}\par
+① 理解自然语言问题，识别查询意图与业务实体；\par
+② 检索数据库 Schema、字段含义、业务口径与示例，构造提示；\par
+③ 调用大模型生成 SQL；\par
+④ 对 SQL 做语法、语义、权限与代价校验；\par
+⑤ 执行查询并整理结果，生成自然语言解释。\par
+\textbf{主要局限与应对：}\par
+① SQL 生成错误：模型可能误解表关联或指标口径。应对：结合 Schema 检索、业务知识库、SQL 静态检查、执行结果校验与人工审核。\par
+② 安全与性能风险：自动生成的 SQL 可能越权访问、全表扫描或耗尽资源。应对：只读权限、查询白名单、执行超时、资源配额、查询计划审查与审计日志。
+\end{answer}
+
+\item \textbf{架构选型论证}\par
+若平台需在业务潮汐波动下控制成本，说明采用云原生存算分离 + Serverless 数据库能带来哪些具体收益（至少两条），并指出需要配套关注的一项风险。
+\begin{answer}
+\textbf{采用云原生存算分离＋Serverless 的收益：}\par
+① 弹性扩缩容：根据业务潮汐自动调整计算资源，满足监控写入与 AI 查询的波动需求。\par
+② 按需付费：低峰时缩减计算资源，部分服务可缩容至零，降低空闲成本。\par
+③ 存储与计算独立扩展：避免为增加存储而同时购买大量计算资源，只读副本更经济。\par
+④ 降低运维成本：自动调度、故障恢复与托管运维减少人工工作。\par
+\textbf{需要关注的风险：}冷启动延迟与资源恢复开销。Serverless 实例从缩容或暂停状态恢复时可能产生较高响应延迟，影响实时告警与交互查询；关键服务应设置最低资源保留、预热或常驻实例。
+\end{answer}
+\end{enumerate}
+
+\end{enumerate}
+
+\end{document}
