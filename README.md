@@ -1,26 +1,103 @@
 <div align="center">
 
-# Course notes
 
-**English** | [简体中文](/readme/README.zh_CN.md) | [繁體中文](/readme/README.zh_TW.md)
+# 课程笔记
+
+**西安交通大学 · 中国石油大学（北京）** 课堂笔记与复习资料，全部使用 LaTeX 排版
+
+[简体中文](README.md) | [English](readme/README.en.md) | [繁體中文](readme/README.zh_TW.md)
+
+**LaTeX 排版** · **PDF 直接下载** · **持续更新**
 
 </div>
 
-## Currently completed notes:
+## 简介
 
-- Technical Economics and Engineering Management, first semester of academic year 2024-2025, CUPB.
+本仓库整理作者本科与研究生阶段的课程笔记和复习资料，正文使用 LaTeX 编写，PDF 可直接下载阅读。
 
-## Currently completing notes:
+所有资料免费分享，持续更新。若对你有帮助，欢迎点一个 **Star** ⭐。
 
-- Machine Learning, first semester of academic year 2024-2025, CUPB.
+## 内容一览
 
+| 课程                            | 学校 / 学期                   | 内容                                      | 页数 | 文件                                                         |
+| :------------------------------ | :---------------------------- | :---------------------------------------- | :--: | :----------------------------------------------------------- |
+| 技术经济与工程管理              | 中国石油大学（北京）· 2024 秋 | 8 章正文 + 考试分析                       | 117  | [PDF](技术经济与工程管理.pdf) · [LaTeX](技术经济与工程管理/) |
+| 研究生数据库课程期末复习题 2026 | 西安交通大学                  | 填空 / 选择 / 简答 / 综合设计，含参考答案 |  25  | [PDF](xjtu研究生数据库课程期末复习题2026.pdf) · [LaTeX](xjtu研究生数据库课程期末复习题2026.tex) |
 
-Free sharing of notes, if useful, please click on **star**. **The right to interpret notes belongs to the author themselves.**
+## 笔记详情
 
-This note is based on the course teacher's PPT and Bilibili video materials. If there is any infringement, please contact my email for resolution. If you need Latex source code, please contact the author.
+### 技术经济与工程管理（117 页）
 
-The notes are being continuously updated on Github, and buying and selling are strictly prohibited.
+- 第 1 章　绪论
+- 第 2 章　现金流量的构成
+- 第 3 章　资金的等值计算
+- 第 4 章　基准折现率的确定
+- 第 5 章　经济效果评价指标
+- 第 6 章　经济效果评价方法
+- 第 7 章　不确定性分析和风险分析
+- 第 8 章　项目的财务评价
+- 考试分析：题型分布与各章考点权重
 
-Only responsible for note sharing, not for answering questions. If there are any corrections, please contact your email.
+### 研究生数据库课程期末复习题 2026（25 页）
 
-My email address `ZSDZZY2022@163.com`
+| 题型             | 题量 |
+| :--------------- | ---: |
+| 填空题           |   21 |
+| 选择题（含解析） |   29 |
+| 简答题           |   16 |
+| 综合设计题       |    2 |
+
+覆盖半结构化数据模型、OEM / RDF / 本体、布隆过滤器与布谷鸟过滤器、跳表、LSM 树、云原生与 AI Native 数据库、RAG、向量检索、B+ 树、连接代价估算等内容，全部题目附参考答案。
+
+## 仓库结构
+
+```text
+Course-Notes/
+├── README.md
+├── readme/                              # 多语言说明
+│   ├── README.en.md
+│   ├── README.zh_CN.md
+│   └── README.zh_TW.md
+├── 技术经济与工程管理.pdf                # 117 页，可直接阅读
+├── 技术经济与工程管理/
+│   ├── main.tex                         # 主文件
+│   ├── chapter1/ … chapter8/            # 各章源码
+│   ├── 考试分析/                         # 题型与考点分布
+│   ├── image/                           # 插图
+│   └── elegantbook.cls
+├── xjtu研究生数据库课程期末复习题2026.tex
+└── xjtu研究生数据库课程期末复习题2026.pdf
+```
+
+## 编译说明
+
+需要完整的 TeX 发行版（TeX Live 或 MiKTeX），并使用 **XeLaTeX** 编译。
+
+```bash
+# 技术经济与工程管理
+cd 技术经济与工程管理
+xelatex main.tex
+xelatex main.tex        # 生成目录与页码，需要跑两遍
+
+# 数据库期末复习题
+xelatex xjtu研究生数据库课程期末复习题2026.tex
+```
+
+- `main.tex` 使用 `ctexbook` 文档类，依赖 `ctex`、`amsmath`、`fancyhdr`、`longtable` 等宏包
+- 复习题使用 `ctexart` + `tcolorbox`（答案框）+ `enumitem` + `booktabs`
+- 复习题的 B+ 树插图位于 `figs/` 目录（8 张 PNG），编译时需与 `.tex` 文件放在同一目录
+
+## 使用与声明
+
+- 资料**免费分享**，**严禁任何形式的买卖**；如果你是通过付费买到的，说明你被骗了。
+- 内容依据课程 PPT、课堂讲授与 B 站公开视频整理，仅供学习交流；如有侵权，请联系作者删除。
+- 欢迎通过 Issue 或 Pull Request 指出错误、补充内容。
+- 仅分享笔记，不负责答疑。
+- 笔记解释权归作者本人所有。
+
+## 联系作者
+
+- 邮箱：`zhangziyan527@163.com`（备用：`ZSDZZY2022@163.com`）
+- GitHub：[@ZZY1234321](https://github.com/ZZY1234321)
+
+<sub>最近更新：2026-11-14 · 新增《研究生数据库课程期末复习题 2026》</sub>
